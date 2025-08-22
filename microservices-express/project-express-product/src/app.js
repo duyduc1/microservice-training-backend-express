@@ -3,8 +3,11 @@ const routes = require("./routes");
 const sequelize = require("../config/database");
 const Product = require("./models/Product.model");
 const morgan = require('morgan');
+const cors = require("cors");
 
 const app = express();
+
+app.use(cors());
 app.use(express.json());
 app.use(morgan('dev'));
 
