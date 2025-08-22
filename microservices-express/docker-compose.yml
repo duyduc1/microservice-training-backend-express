@@ -1,0 +1,60 @@
+version: "3.9"
+
+services:
+  mongo:
+    image: mongo:6
+    container_name: mongo
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  mysql:
+    image: mysql:8
+    container_name: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 2804
+      MYSQL_DATABASE: product_service
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  auth-service:
+    build: ./project-express-authen
+    container_name: auth-service
+    restart: always
+    env_file:
+      - ./project-express-authen/.env.authen
+    depends_on:
+      - mongo
+    ports:
+      - "5000:5000"
+
+  product-service:
+    build: ./project-express-product
+    container_name: product-service
+    restart: always
+    env_file:
+      - ./project-express-product/.env.product
+    depends_on:
+      - mysql
+    ports:
+      - "4000:4000"
+
+  upload-service:
+    build: ./project-express-uploadfile
+    container_name: upload-service
+    restart: always
+    env_file:
+      - ./project-express-uploadfile/.env.uploadfile
+    depends_on:
+      - mongo
+    ports:
+      - "3000:3000"
+
+volumes:
+  mongo_data:
+  mysql_data:
