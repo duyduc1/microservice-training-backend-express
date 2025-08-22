@@ -12,7 +12,7 @@ class UserService {
     }
 
     async updateUser(id , data) {
-        return User.findByIdAndUpdate(id, data, { new: true });
+        return User.findByIdAndUpdate(id, data, { new: true, runValidators: true });
     }
 
     async deleteUserById(id) {

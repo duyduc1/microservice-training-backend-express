@@ -12,8 +12,13 @@ exports.getProduct = async (req, res) => {
 };
 
 exports.createProduct = async (req, res) => {
-  const product = await productService.create(req.body);
-  res.status(201).json(product);
+  try {
+    const product = await productService.create(req.body);    
+    res.status(201).json(product);
+  } catch (err) {
+    console.error("Error creating product:", err);
+    res.status(500).json({ message: "Internal server error", error: err.message });
+  }
 };
 
 exports.updateProduct = async (req, res) => {

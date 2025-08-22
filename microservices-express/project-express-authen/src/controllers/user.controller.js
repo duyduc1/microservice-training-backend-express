@@ -23,8 +23,8 @@ class UserController {
 
     async updateUser(req, res, next) {
         try {
-            const userUpdated = await userService.updateUser(req.params.id)
-            if(!user) return response.notFound(res, 'User not found');
+            const userUpdated = await userService.updateUser(req.params.id, req.body)
+            if(!userUpdated) return response.notFound(res, 'User not found');
             return response.success(res, userUpdated);
         } catch (error) {
             next(error);
