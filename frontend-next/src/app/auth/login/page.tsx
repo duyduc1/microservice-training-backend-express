@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { login } from "@/services/authService";
+import "./login.css";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -18,34 +19,28 @@ export default function LoginPage() {
     }
   };
 
-  return (
-    <div className="flex justify-center items-center h-screen bg-gray-100">
-      <form
-        onSubmit={handleSubmit}
-        className="bg-white shadow-md rounded-lg p-8 w-96"
-      >
-        <h1 className="text-xl font-bold mb-4">Login</h1>
-        <input
-          type="email"
-          placeholder="Email"
-          className="w-full border p-2 mb-4 rounded"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          className="w-full border p-2 mb-4 rounded"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button
-          type="submit"
-          className="bg-blue-600 text-white px-4 py-2 rounded w-full"
-        >
-          Login
-        </button>
-      </form>
-    </div>
+return (
+    <>
+      <div className="auth-container">
+        <h2>Đăng nhập</h2>
+        <form onSubmit={handleSubmit} className="auth-form">
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          <input
+            type="password"
+            placeholder="Mật khẩu"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          <button type="submit">Đăng nhập</button>
+        </form>
+      </div>
+    </>
   );
 }
