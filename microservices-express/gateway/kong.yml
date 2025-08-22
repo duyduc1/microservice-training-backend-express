@@ -1,0 +1,27 @@
+_format_version: "3.0"
+
+services:
+  - name: auth-service
+    url: http://auth-service:5000
+    routes:
+      - name: auth-route
+        paths:
+          - /api/auth
+          - /api/users
+        strip_path: false
+
+  - name: product-service
+    url: http://product-service:4000
+    routes:
+      - name: product-route
+        paths:
+          - /api/products
+        strip_path: false
+
+  - name: upload-service
+    url: http://upload-service:3000
+    routes:
+      - name: upload-route
+        paths:
+          - /api/upload
+        strip_path: false
