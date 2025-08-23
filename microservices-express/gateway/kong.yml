@@ -2,7 +2,7 @@ _format_version: "3.0"
 
 services:
   - name: auth-service
-    url: http://auth-service:5000
+    url: http://auth-service:3001
     routes:
       - name: auth-route
         paths:
@@ -11,7 +11,7 @@ services:
         strip_path: false
 
   - name: product-service
-    url: http://product-service:4000
+    url: http://product-service:3002
     routes:
       - name: product-route
         paths:
@@ -19,7 +19,7 @@ services:
         strip_path: false
 
   - name: upload-service
-    url: http://upload-service:3000
+    url: http://upload-service:3003
     routes:
       - name: upload-route
         paths:

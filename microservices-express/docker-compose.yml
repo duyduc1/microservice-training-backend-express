@@ -31,7 +31,7 @@ services:
     depends_on:
       - mongo
     ports:
-      - "5000:5000"
+      - "3001:3001"
 
   product-service:
     build: ./project-express-product
@@ -42,7 +42,7 @@ services:
     depends_on:
       - mysql
     ports:
-      - "4000:4000"
+      - "3002:3002"
 
   upload-service:
     build: ./project-express-uploadfile
@@ -53,7 +53,7 @@ services:
     depends_on:
       - mongo
     ports:
-      - "3000:3000"
+      - "3003:3003"
     
   kong:
     build: ./gateway   
