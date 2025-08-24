@@ -10,15 +10,18 @@ class AuthService {
         return user.save();
     }
 
-    async findByEmail(email) {
-        return User.findOne({ email });
-    }
-
     async checkPassword(rawPassword, hashedPassword) {
         return bcrypt.compare(rawPassword, hashedPassword);
     }
 
-    // forgot password
+    async findById(id) {
+        return User.findById(id);
+    }
+
+    async findByEmail(email) {
+        return User.findOne({ email });
+    }
+
     async generateResetToken(email) {
         const user = await User.findOne({ email });
         if (!user) return null;
@@ -31,7 +34,6 @@ class AuthService {
         return { user, token };
     }
 
-    // reset password
     async resetPassword(token, newPassword) {
         const user = await User.findOne({
             resetToken: token,

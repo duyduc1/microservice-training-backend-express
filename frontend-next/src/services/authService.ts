@@ -21,3 +21,17 @@ export async function login(data: LoginData) {
   const res = await api.post("/auth/login", data);
   return res.data;
 }
+
+
+export function loginWithGoogle() {
+  window.location.href = "http://localhost:3001/api/auth/google";
+}
+
+export function handleGoogleCallback() {
+  const params = new URLSearchParams(window.location.search);
+  const token = params.get("token");
+  if (token) {
+    localStorage.setItem("auth_token", token);
+  }
+  return token;
+}

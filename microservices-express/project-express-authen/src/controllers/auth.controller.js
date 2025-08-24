@@ -45,6 +45,22 @@ class AuthController {
         }
     }
 
+    async googleCallback(req, res, next) {
+        try {
+            const user = req.user;
+
+            const token = jwt.sign(
+                { id: user._id, email: user.email, name: user.name, role: user.role },
+                process.env.JWT_SECRET,
+                { expiresIn: "1h" }
+            );
+
+            res.redirect(`http://localhost:3000?token=${token}`)
+        } catch (error) {
+            next(error);
+        }
+    }
+
     async forgorPassword(req, res, next) {
         try {
             const { email } = req.body;
@@ -53,7 +69,7 @@ class AuthController {
                 return response.error(res, 'User not found', 404);
             }
             
-            const resetUrl = `http://localhost:5000/api/auth/resetpass?token=${result.token}`;
+            const resetUrl = `http://localhost:3001/api/auth/resetpass?token=${result.token}`;
 
             await sendMail(
                 result.user.email,
