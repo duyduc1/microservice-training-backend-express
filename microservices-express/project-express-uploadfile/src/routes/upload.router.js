@@ -10,4 +10,4 @@ router.get('/:id', authMiddleware, uploadController.getFileById);
 router.put('/:id', authMiddleware, uploadController.updateFile);
 router.delete('/:id', authMiddleware, uploadController.deleteFile);
 
-module.exports = router
+module.exports = router;

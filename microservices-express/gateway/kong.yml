@@ -24,4 +24,5 @@ services:
       - name: upload-route
         paths:
           - /api/upload
+          - /api/excel
         strip_path: false
